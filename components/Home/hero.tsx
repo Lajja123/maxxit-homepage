@@ -1,11 +1,15 @@
 "use client";
 
-import React from "react";
 import Button from "@/components/ui/Button"
 import Typography from "@/theme/Typography"
 import Image from "next/image";
 import eigen from "@/assets/eigenai.webp"
 import { CountUp } from "../ui/CountUp";
+import { TrendingUp, Clock, Shield } from 'lucide-react';
+import GetStartedSection from "./getStarted";
+import Layers from "./Layers";
+import Performance from "./Performance";
+import Clubs from "./Clubs";
 
 
 // Animated Title
@@ -56,14 +60,10 @@ export default function Hero() {
   const text ="THE DECENTRALIZED TRADING ECONOMY"
   return (
     <section className="relative min-h-screen overflow-hidden ">
-      {/* Subtle gradient background */}
-      
-    
-
-      {/* Main Content */}
+     
       <div className=" mx-auto  px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-start items-center">
         <div className="text-center py-20">
-          <div className="mb-5 flex gap-3 items-center justify-center border rounded-full border-white/60 mx-auto p-2 w-1/3 bg-white">
+          <div className="mb-5 flex gap-3 items-center justify-center border rounded-full border-white/60 mx-auto p-2 w-1/3 bg-white max-w-[300px]">
         <span className="text-sm md:text-base text-black/70">
               Powered by{" "}
             </span>
@@ -102,58 +102,58 @@ export default function Hero() {
           </div>
 
           <div className="mt-20 w-full grid grid-cols-1 md:grid-cols-3 border border-white/10 rounded-xl overflow-hidden bg-black/40 backdrop-blur">
-      
-      {/* Stat 1 */}
-      <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">
-        <div className="text-4xl font-semibold text-white">
-          <CountUp end={261} suffix="+" />
-        </div>
-        <p className="mt-2 text-sm text-gray-400">
-        TRADING PAIRS        </p>
-      </div>
-
-      {/* Stat 2 */}
-      <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">
-        <div className="text-4xl font-semibold text-white">
-      24/7  
-        </div>
-        <p className="mt-2 text-sm text-gray-400">
-        AUTOMATED        </p>
-      </div>
-
-      {/* Stat 3 */}
-      <div className="p-8 text-center">
-        <div className="text-4xl font-semibold text-white">
-          <CountUp end={100} suffix="%" />
-        </div>
-        <p className="mt-2 text-sm text-gray-400">
-        NON-CUSTODIAL        </p>
-      </div>
-
-    </div>
-   
-        {/* </div>
-        <div className="relative py-20 overflow-hidden">
   
-  <div className="relative rotate-[-5deg] bg-white overflow-hidden">
-    
-    <div
-      className="flex whitespace-nowrap "
-      style={{ animation: "marquee 25s linear infinite" }}
-    >
-      <span className="px-8 py-6 text-black text-xl font-bold tracking-wide">
-{text.repeat(4)}      </span>
-      <span className="px-8 py-6 text-black text-xl font-bold tracking-wide">
-        {text}
-      </span>
+  {/* Stat 1 */}
+  <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">
+    <div className="flex justify-center mb-4">
+      <TrendingUp className="w-12 h-12 text-green-400" />
     </div>
+    <div className="text-4xl font-semibold text-white">
+      <CountUp end={261} suffix="+" />
+    </div>
+    <p className="mt-2 text-sm text-gray-400">
+      TRADING PAIRS
+    </p>
+  </div>
 
-  </div> */}
+  {/* Stat 2 */}
+  <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">
+    <div className="flex justify-center mb-4">
+      <Clock className="w-12 h-12 text-green-400" />
+    </div>
+    <div className="text-4xl font-semibold text-white">
+      24/7
+    </div>
+    <p className="mt-2 text-sm text-gray-400">
+      AUTOMATED
+    </p>
+  </div>
+
+  {/* Stat 3 */}
+  <div className="p-8 text-center">
+    <div className="flex justify-center mb-4">
+      <Shield className="w-12 h-12 text-green-400" />
+    </div>
+    <div className="text-4xl font-semibold text-white">
+      <CountUp end={100} suffix="%" />
+    </div>
+    <p className="mt-2 text-sm text-gray-400">
+      NON-CUSTODIAL
+    </p>
+  </div>
+
+</div>
+   
 
 
     
     </div>
       </div>
+<Layers/>
+<Performance/>
+{/* <Clubs/> */}
+<GetStartedSection/>
     </section>
+    
   );
 }
