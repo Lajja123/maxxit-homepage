@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button"
 import Typography from "@/theme/Typography"
 import Image from "next/image";
@@ -59,8 +60,34 @@ const AnimatedTitle = () => {
 
 export default function Hero() {
   const text = "THE DECENTRALIZED TRADING ECONOMY"
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const revealClass = revealed
+    ? "opacity-100 translate-y-0"
+    : "opacity-0 translate-y-6";
+  const revealTransition = "transition-all duration-700 ease-out";
+
   return (
-    <section className="relative min-h-screen overflow-hidden ">
+    <section ref={heroRef} className="relative min-h-screen overflow-hidden ">
 
       <div className=" mx-auto  px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-between items-center">
         <div className="text-center py-20">
@@ -82,7 +109,7 @@ export default function Hero() {
 
           {/* Subtitle */}
           <div
-            className="mt-6 lg:mt-8 max-w-2xl mx-auto animate-blur-reveal "
+            className={`mt-6 lg:mt-8 max-w-2xl mx-auto animate-blur-reveal ${revealTransition} ${revealClass}`}
             style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
           >
             <Typography variant="body" align="center" className="text-[#8A8A80]" weight="normal">
@@ -95,14 +122,14 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div
-            className="mt-10 lg:mt-12 flex flex-wrap items-center justify-center gap-4 animate-blur-reveal "
+            className={`mt-10 lg:mt-12 flex flex-wrap items-center justify-center gap-4 animate-blur-reveal ${revealTransition} ${revealClass}`}
             style={{ animationDelay: "0.7s", animationFillMode: "forwards" }}
           >
             <Button variant="black">Launch App</Button>
             <Button variant="white">Share Your Signals</Button>
           </div>
 
-          <div className="mt-20 w-full grid grid-cols-1 md:grid-cols-3 border border-white/10 rounded-xl overflow-hidden bg-black/40 backdrop-blur">
+          <div className={`mt-20 w-full grid grid-cols-1 md:grid-cols-3 border border-white/10 rounded-xl overflow-hidden bg-black/40 backdrop-blur ${revealTransition} ${revealClass}`}>
 
             {/* Stat 1 */}
             <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">

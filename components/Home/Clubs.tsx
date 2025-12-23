@@ -240,7 +240,7 @@ const Clubs = () => {
 
         {/* Horizontal Scroll Container */}
         <div
-          className="overflow-x-hidden w-full"
+          className=" w-full"
           onMouseEnter={() => (isHoveredRef.current = true)}
           onMouseLeave={() => (isHoveredRef.current = false)}
         >
