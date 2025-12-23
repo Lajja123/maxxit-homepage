@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
 
 interface LenisProviderProps {
@@ -12,24 +12,32 @@ interface LenisProviderProps {
  * It binds to the document scroller and cleans up on unmount.
  */
 const LenisProvider = ({ children }: LenisProviderProps) => {
+  const lenisRef = useRef<Lenis | null>(null);
+  const frameRef = useRef<number | null>(null);
+
   useEffect(() => {
+    // Bail out during SSR
+    if (typeof window === "undefined") return;
+
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true,
-      smoothTouch: false,
+      // syncTouch keeps touch scrolling in sync without deprecated smoothTouch
+      syncTouch: true,
     });
+    lenisRef.current = lenis;
 
-    let frame: number;
     const raf = (time: number) => {
       lenis.raf(time);
-      frame = requestAnimationFrame(raf);
+      frameRef.current = requestAnimationFrame(raf);
     };
 
-    frame = requestAnimationFrame(raf);
+    frameRef.current = requestAnimationFrame(raf);
 
     return () => {
-      cancelAnimationFrame(frame);
-      lenis.destroy();
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
     };
   }, []);
 
