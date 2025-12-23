@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import DotGrid from "@/components/DotGrid";
 import Navbar from "@/components/Navbar/page";
 import Footer from "@/components/Footer/page";
-import Marquee from "@/components/ui/Marqee";
+import LenisProvider from "@/components/LenisProvider";
 
 export const metadata: Metadata = {
   title: "Maxxit",
@@ -37,11 +37,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${AeonikBold.variable} ${AeonikRegular.variable} `}>
-      <DotGrid />
-      {/* <Marquee/> */}
-      <Navbar />
-        {children}
-        <Footer />
+        <LenisProvider>
+          <DotGrid />
+          <Navbar />
+            {children}
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );

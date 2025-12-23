@@ -10,6 +10,7 @@ import GetStartedSection from "./getStarted";
 import Layers from "./Layers";
 import Performance from "./Performance";
 import Clubs from "./Clubs";
+import { ScrollMarquee } from "../ui/ScrollMarquee";
 
 
 // Animated Title
@@ -57,39 +58,39 @@ const AnimatedTitle = () => {
 };
 
 export default function Hero() {
-  const text ="THE DECENTRALIZED TRADING ECONOMY"
+  const text = "THE DECENTRALIZED TRADING ECONOMY"
   return (
     <section className="relative min-h-screen overflow-hidden ">
-     
-      <div className=" mx-auto  px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-start items-center">
+
+      <div className=" mx-auto  px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-between items-center">
         <div className="text-center py-20">
           <div className="mb-5 flex gap-3 items-center justify-center border rounded-full border-white/60 mx-auto p-2 w-1/3 bg-white max-w-[300px]">
-        <span className="text-sm md:text-base text-black/70">
+            <span className="text-sm md:text-base text-black/70">
               Powered by{" "}
             </span>
             <div className="bg-white">
-            <Image
-              src={eigen}
-              alt="Eigen AI"
-              width={100}
-              height={100}
-              className="object-contain"
-            />
+              <Image
+                src={eigen}
+                alt="Eigen AI"
+                width={100}
+                height={100}
+                className="object-contain"
+              />
             </div></div>
           {/* Title */}
           <AnimatedTitle />
 
           {/* Subtitle */}
-          <div 
+          <div
             className="mt-6 lg:mt-8 max-w-2xl mx-auto animate-blur-reveal "
             style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
           >
             <Typography variant="body" align="center" className="text-[#8A8A80]" weight="normal">
-            Three AI agents work together: one finds the best alpha from research institutes and crypto Twitter, one becomes your 24/7 trading clone that sets position size and leverage, and one routes trades to the optimal venue for gasless, non-custodial execution.
+              Three AI agents work together: one finds the best alpha from research institutes and crypto Twitter, one becomes your 24/7 trading clone that sets position size and leverage, and one routes trades to the optimal venue for gasless, non-custodial execution.
 
 
             </Typography>
-           
+
           </div>
 
           {/* CTA Buttons */}
@@ -102,58 +103,56 @@ export default function Hero() {
           </div>
 
           <div className="mt-20 w-full grid grid-cols-1 md:grid-cols-3 border border-white/10 rounded-xl overflow-hidden bg-black/40 backdrop-blur">
-  
-  {/* Stat 1 */}
-  <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">
-    <div className="flex justify-center mb-4">
-      <TrendingUp className="w-12 h-12 text-green-400" />
-    </div>
-    <div className="text-4xl font-semibold text-white">
-      <CountUp end={261} suffix="+" />
-    </div>
-    <p className="mt-2 text-sm text-gray-400">
-      TRADING PAIRS
-    </p>
-  </div>
 
-  {/* Stat 2 */}
-  <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">
-    <div className="flex justify-center mb-4">
-      <Clock className="w-12 h-12 text-green-400" />
-    </div>
-    <div className="text-4xl font-semibold text-white">
-      24/7
-    </div>
-    <p className="mt-2 text-sm text-gray-400">
-      AUTOMATED
-    </p>
-  </div>
+            {/* Stat 1 */}
+            <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">
+              <div className="flex justify-center mb-4">
+                <TrendingUp className="w-12 h-12 text-green-400" />
+              </div>
+              <div className="text-4xl font-semibold text-white">
+                <CountUp end={261} suffix="+" />
+              </div>
+              <p className="mt-2 text-sm text-gray-400">
+                TRADING PAIRS
+              </p>
+            </div>
 
-  {/* Stat 3 */}
-  <div className="p-8 text-center">
-    <div className="flex justify-center mb-4">
-      <Shield className="w-12 h-12 text-green-400" />
-    </div>
-    <div className="text-4xl font-semibold text-white">
-      <CountUp end={100} suffix="%" />
-    </div>
-    <p className="mt-2 text-sm text-gray-400">
-      NON-CUSTODIAL
-    </p>
-  </div>
+            {/* Stat 2 */}
+            <div className="p-8 text-center border-b md:border-b-0 md:border-r border-white/10">
+              <div className="flex justify-center mb-4">
+                <Clock className="w-12 h-12 text-green-400" />
+              </div>
+              <div className="text-4xl font-semibold text-white">
+                24/7
+              </div>
+              <p className="mt-2 text-sm text-gray-400">
+                AUTOMATED
+              </p>
+            </div>
 
-</div>
-   
+            {/* Stat 3 */}
+            <div className="p-8 text-center">
+              <div className="flex justify-center mb-4">
+                <Shield className="w-12 h-12 text-green-400" />
+              </div>
+              <div className="text-4xl font-semibold text-white">
+                <CountUp end={100} suffix="%" />
+              </div>
+              <p className="mt-2 text-sm text-gray-400">
+                NON-CUSTODIAL
+              </p>
+            </div>
+
+          </div>
 
 
-    
-    </div>
+
+
+        </div>
+
       </div>
-<Layers/>
-<Performance/>
-{/* <Clubs/> */}
-<GetStartedSection/>
+
     </section>
-    
+
   );
 }

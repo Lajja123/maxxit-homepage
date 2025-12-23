@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, ArrowDown } from 'lucide-react';
+"use client"
+import React, { useState, useRef } from 'react';
 import Typography from '@/theme/Typography';
 
 const Layers = () => {
@@ -12,50 +12,119 @@ const Layers = () => {
       number: '01',
       title: 'AGENT WHAT',
       subtitle: 'The Alpha Layer',
-      description: 'Consumes signals from curated research institutes, crypto Twitter accounts, and private Telegram channels. Uses deterministic AI to filter noise and convert high-conviction calls into executable signals. Alpha creators are ranked and paid based on realized P&L of their signals.',
+      description:
+        'Signal selection. Benchmarks and scores your trusted sources by realized performance, then converts messy human alpha (tweets, Telegram, research notes) into objective, tradable parameters using deterministic AI.',
       rightContent: (
-        <div className="w-full h-full flex flex-col">
-         <div className="w-full h-full relative">
-          {/* Plus signs in corners */}
-          <div className="absolute top-8 left-8 text-white text-2xl">+</div>
-          <div className="absolute top-8 right-8 text-white text-2xl">+</div>
-          
-          {/* Central neon green cross/connector shape */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <svg width="320" height="320" viewBox="0 0 320 320" className="w-80 h-80">
-              {/* Central circular body */}
-              <circle cx="160" cy="160" r="60" fill="#00ff88" />
-              
-              {/* Top arm with cutout */}
-              <path
-                d="M 140 0 L 180 0 L 180 120 L 160 140 L 140 120 Z"
-                fill="#00ff88"
-              />
-              <rect x="148" y="90" width="24" height="20" fill="#000" rx="2" />
-              
-              {/* Bottom arm with cutout */}
-              <path
-                d="M 140 320 L 180 320 L 180 200 L 160 180 L 140 200 Z"
-                fill="#00ff88"
-              />
-              <rect x="148" y="210" width="24" height="20" fill="#000" rx="2" />
-              
-              {/* Left arm with cutout */}
-              <path
-                d="M 0 140 L 0 180 L 120 180 L 140 160 L 120 140 Z"
-                fill="#00ff88"
-              />
-              <rect x="90" y="148" width="20" height="24" fill="#000" rx="2" />
-              
-              {/* Right arm with cutout */}
-              <path
-                d="M 320 140 L 320 180 L 200 180 L 180 160 L 200 140 Z"
-                fill="#00ff88"
-              />
-              <rect x="210" y="148" width="20" height="24" fill="#000" rx="2" />
-            </svg>
+        <div className="w-full h-full flex flex-col p-10 gap-6">
+          <div className="flex items-center justify-between mb-4">
+            <Typography
+              variant="span"
+              color="white"
+              className="text-[10px] tracking-[0.2em] uppercase text-white/60"
+            >
+              What it does
+            </Typography>
+            <Typography
+              variant="span"
+              color="#00ff88"
+              className="text-[10px] tracking-[0.18em] uppercase"
+            >
+              Deterministic AI · Signal Selection
+            </Typography>
           </div>
-        </div>
+
+          <Typography
+            variant="span"
+            color="white"
+            className="text-xs md:text-sm text-white/80 leading-relaxed max-w-md"
+          >
+            AGENT WHAT is the <span className="font-semibold">signal selection layer</span>. It takes
+            the messy stream of content you already follow — research institutes, crypto Twitter,
+            private Telegram channels — and turns it into structured, benchmarked trading intent.
+          </Typography>
+
+          <div className="space-y-3 text-xs text-white/80">
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                1
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  Benchmarked Sources
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Tracks outcomes over time and scores each source by realized P&amp;L impact so you
+                  see <span className="font-semibold">who&apos;s right often enough to matter</span>.
+                </Typography>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                2
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  Structured Trade Intent
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Converts human alpha into objective trade parameters:{' '}
+                  <span className="text-[#00ff88]">
+                    asset + direction, strength / conviction, horizon, risk cues
+                  </span>{' '}
+                  plus a confidence score for downstream sizing.
+                </Typography>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                3
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  Deterministic Behavior
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Same input, same output — deterministic AI keeps decisions{' '}
+                  <span className="font-semibold">reproducible, predictable, and debuggable</span>,
+                  without AI &quot;moods&quot;.
+                </Typography>
+              </div>
+            </div>
+          </div>
+
+          <Typography
+            variant="span"
+            color="white"
+            className="mt-2 text-[11px] text-white/40 uppercase tracking-[0.18em]"
+          >
+            FEEDS THE &quot;HOW&quot; AND &quot;WHERE&quot; AGENTS WITH CLEAN, OBJECTIVE SIGNALS.
+          </Typography>
         </div>
       )
     },
@@ -63,48 +132,115 @@ const Layers = () => {
       number: '02',
       title: 'AGENT HOW',
       subtitle: 'Your Trading Clone',
-      description: 'A personalized AI that becomes your 24/7 trading presence. For each signal, it analyzes current market conditions, determines optimal position size, sets appropriate leverage, and manages risk parameters — all tuned to your preferences and risk tolerance.',
+      description:
+        'Your trading clone. Takes each validated signal and executes it in your style — tuning position sizing, leverage, and risk management to your preferences so you copy the edge, not someone else’s exact trade.',
       rightContent: (
-        <div className="w-full h-full relative">
-          {/* Plus signs in corners */}
-          <div className="absolute top-8 left-8 text-white text-2xl">+</div>
-          <div className="absolute top-8 right-8 text-white text-2xl">+</div>
-          
-          {/* Central neon green cross/connector shape */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <svg width="320" height="320" viewBox="0 0 320 320" className="w-80 h-80">
-              {/* Central circular body */}
-              <circle cx="160" cy="160" r="60" fill="#00ff88" />
-              
-              {/* Top arm with cutout */}
-              <path
-                d="M 140 0 L 180 0 L 180 120 L 160 140 L 140 120 Z"
-                fill="#00ff88"
-              />
-              <rect x="148" y="90" width="24" height="20" fill="#000" rx="2" />
-              
-              {/* Bottom arm with cutout */}
-              <path
-                d="M 140 320 L 180 320 L 180 200 L 160 180 L 140 200 Z"
-                fill="#00ff88"
-              />
-              <rect x="148" y="210" width="24" height="20" fill="#000" rx="2" />
-              
-              {/* Left arm with cutout */}
-              <path
-                d="M 0 140 L 0 180 L 120 180 L 140 160 L 120 140 Z"
-                fill="#00ff88"
-              />
-              <rect x="90" y="148" width="20" height="24" fill="#000" rx="2" />
-              
-              {/* Right arm with cutout */}
-              <path
-                d="M 320 140 L 320 180 L 200 180 L 180 160 L 200 140 Z"
-                fill="#00ff88"
-              />
-              <rect x="210" y="148" width="20" height="24" fill="#000" rx="2" />
-            </svg>
+        <div className="w-full h-full flex flex-col p-10 gap-6">
+          <div className="flex items-center justify-between mb-4">
+            <Typography
+              variant="span"
+              color="white"
+              className="text-[10px] tracking-[0.2em] uppercase text-white/60"
+            >
+              What it does
+            </Typography>
+            <Typography
+              variant="span"
+              color="#00ff88"
+              className="text-[10px] tracking-[0.18em] uppercase"
+            >
+              Risk Engine · Trading Clone
+            </Typography>
           </div>
+
+          <Typography
+            variant="span"
+            color="white"
+            className="text-xs md:text-sm text-white/80 leading-relaxed max-w-md"
+          >
+            AGENT HOW is your <span className="font-semibold">24/7 trading presence</span>. It takes
+            structured intent from AGENT WHAT and expresses it according to{' '}
+            <span className="font-semibold">your</span> risk style — not the signal source&apos;s.
+          </Typography>
+
+          <div className="space-y-3 text-xs text-white/80">
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                1
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  Position Sizing
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Sizes each trade to your configured risk tolerance — for example 1–2% per idea vs
+                  5–10% for higher conviction — using conviction, horizon, and market context.
+                </Typography>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                2
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  Leverage &amp; Exposure
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Applies leverage and exposure limits you set: max leverage, per-trade caps, and
+                  portfolio constraints, while still expressing the edge.
+                </Typography>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                3
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  Risk Parameters
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Turns risk cues into concrete stop-loss and take-profit rules so execution stays
+                  consistent and emotionless.
+                </Typography>
+              </div>
+            </div>
+          </div>
+
+          <Typography
+            variant="span"
+            color="white"
+            className="mt-2 text-[11px] text-white/40 uppercase tracking-[0.18em]"
+          >
+            YOU COPY THE EDGE, BUT TRADE IT LIKE YOU — NOT LIKE THE ORIGINAL SOURCE.
+          </Typography>
         </div>
       )
     },
@@ -112,148 +248,123 @@ const Layers = () => {
       number: '03',
       title: 'AGENT WHERE',
       subtitle: 'Best Execution',
-      description: 'Routes each trade to the optimal venue based on liquidity, fees, and available pairs. Currently supports Hyperliquid (200+ pairs) and Ostium (61 RWA pairs including forex and commodities). Executes non-custodially through Gnosis Safe modules.',
+      description:
+        'Venue selection and monitoring. Routes trades to the best non-custodial venue, executes on-chain, and then watches positions 24/7 to manage exits, liquidations, and risk — without ever taking custody of your funds.',
       rightContent: (
-        <div className="w-full h-full flex flex-col items-center justify-center px-12">
-          <div className="w-full h-full relative">
-          {/* Plus signs in corners */}
-          <div className="absolute top-8 left-8 text-white text-2xl">+</div>
-          <div className="absolute top-8 right-8 text-white text-2xl">+</div>
-          
-          {/* Central neon green cross/connector shape */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <svg width="320" height="320" viewBox="0 0 320 320" className="w-80 h-80">
-              {/* Central circular body */}
-              <circle cx="160" cy="160" r="60" fill="#00ff88" />
-              
-              {/* Top arm with cutout */}
-              <path
-                d="M 140 0 L 180 0 L 180 120 L 160 140 L 140 120 Z"
-                fill="#00ff88"
-              />
-              <rect x="148" y="90" width="24" height="20" fill="#000" rx="2" />
-              
-              {/* Bottom arm with cutout */}
-              <path
-                d="M 140 320 L 180 320 L 180 200 L 160 180 L 140 200 Z"
-                fill="#00ff88"
-              />
-              <rect x="148" y="210" width="24" height="20" fill="#000" rx="2" />
-              
-              {/* Left arm with cutout */}
-              <path
-                d="M 0 140 L 0 180 L 120 180 L 140 160 L 120 140 Z"
-                fill="#00ff88"
-              />
-              <rect x="90" y="148" width="20" height="24" fill="#000" rx="2" />
-              
-              {/* Right arm with cutout */}
-              <path
-                d="M 320 140 L 320 180 L 200 180 L 180 160 L 200 140 Z"
-                fill="#00ff88"
-              />
-              <rect x="210" y="148" width="20" height="24" fill="#000" rx="2" />
-            </svg>
+        <div className="w-full h-full flex flex-col p-10 gap-6">
+          <div className="flex items-center justify-between mb-4">
+            <Typography
+              variant="span"
+              color="white"
+              className="text-[10px] tracking-[0.2em] uppercase text-white/60"
+            >
+              What it does
+            </Typography>
+            <Typography
+              variant="span"
+              color="#00ff88"
+              className="text-[10px] tracking-[0.18em] uppercase"
+            >
+              Venue Routing · 24/7 Monitoring
+            </Typography>
           </div>
-        </div>
+
+          <Typography
+            variant="span"
+            color="white"
+            className="text-xs md:text-sm text-white/80 leading-relaxed max-w-md"
+          >
+            AGENT WHERE is the <span className="font-semibold">execution and monitoring layer</span>
+            . It picks the best non-custodial venue (primarily Ostium on Arbitrum) and then watches
+            positions continuously to manage exits and liquidation risk — while your funds stay in
+            your wallet.
+          </Typography>
+
+          <div className="space-y-3 text-xs text-white/80">
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                1
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  Venue Selection
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Routes orders to venues like <span className="text-[#00ff88]">Ostium</span> based
+                  on liquidity, fees, pairs, and on-chain conditions to target best execution.
+                </Typography>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                2
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  Non-Custodial Perps
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Uses Ostium&apos;s delegation model so the agent can open and close perpetual
+                  positions but <span className="font-semibold">can&apos;t withdraw your funds</span>
+                  — assets stay in your wallet.
+                </Typography>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 border border-white/10 rounded-lg p-3 bg-white/5">
+              <div className="mt-0.5 h-5 w-5 rounded-full border border-[#00ff88] flex items-center justify-center text-[10px] text-[#00ff88]">
+                3
+              </div>
+              <div>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                >
+                  24/7 Monitoring
+                </Typography>
+                <Typography
+                  variant="span"
+                  color="white"
+                  className="leading-relaxed text-[11px]"
+                >
+                  Watches prices and funding in real time to execute stops, take-profit, and manage
+                  liquidation risk — even when you&apos;re offline.
+                </Typography>
+              </div>
+            </div>
+          </div>
+
+          <Typography
+            variant="span"
+            color="white"
+            className="mt-2 text-[11px] text-white/40 uppercase tracking-[0.18em]"
+          >
+            FULLY ON-CHAIN, FULLY NON-CUSTODIAL — YOU CAN REVOKE ACCESS AT ANY TIME.
+          </Typography>
         </div>
       )
     }
   ];
 
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (isScrolling.current) return;
-      
-      e.preventDefault();
-      
-      if (e.deltaY > 0 && currentStep < steps.length - 1) {
-        isScrolling.current = true;
-        setCurrentStep(prev => prev + 1);
-        setTimeout(() => { isScrolling.current = false; }, 800);
-      } else if (e.deltaY < 0 && currentStep > 0) {
-        isScrolling.current = true;
-        setCurrentStep(prev => prev - 1);
-        setTimeout(() => { isScrolling.current = false; }, 800);
-      }
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('wheel', handleWheel, { passive: false });
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('wheel', handleWheel);
-      }
-    };
-  }, [currentStep, steps.length]);
-
-  useEffect(() => {
-    let touchStart = 0;
-    
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStart = e.touches[0].clientY;
-    };
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (isScrolling.current) return;
-      
-      const touchEnd = e.changedTouches[0].clientY;
-      const diff = touchStart - touchEnd;
-
-      if (Math.abs(diff) > 50) {
-        if (diff > 0 && currentStep < steps.length - 1) {
-          isScrolling.current = true;
-          setCurrentStep(prev => prev + 1);
-          setTimeout(() => { isScrolling.current = false; }, 800);
-        } else if (diff < 0 && currentStep > 0) {
-          isScrolling.current = true;
-          setCurrentStep(prev => prev - 1);
-          setTimeout(() => { isScrolling.current = false; }, 800);
-        }
-      }
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('touchstart', handleTouchStart);
-      container.addEventListener('touchend', handleTouchEnd);
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('touchstart', handleTouchStart);
-        container.removeEventListener('touchend', handleTouchEnd);
-      }
-    };
-  }, [currentStep, steps.length]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowDown' && currentStep < steps.length - 1) {
-        setCurrentStep(prev => prev + 1);
-      } else if (e.key === 'ArrowUp' && currentStep > 0) {
-        setCurrentStep(prev => prev - 1);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentStep, steps.length]);
-
-  const nextStep = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const prevStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
+  // Scroll, touch and key interactions removed: interaction is now hover/click based
 
   const currentData = steps[currentStep];
   
@@ -268,107 +379,148 @@ const Layers = () => {
   const progressPercentage = ((currentStep + 1) / steps.length) * 100;
 
   return (
-    <div className="relative " >
-      <div 
+    <div className="relative py-20">
+      <div
         ref={containerRef}
-        className="sticky top-0 h-screen bg-black text-white font-mono flex overflow-hidden z-50"
+        className="sticky top-0 bg-black text-white font-mono flex overflow-hidden z-50 py-5"
       >
-      {/* Left Section */}
-      <div className="w-1/2 flex flex-col border-r border-gray-800 relative">
-        {/* Vertical divider with tick marks and progress line - show for all steps */}
-        <div className="absolute right-0 top-0 bottom-0 w-px">
-          {/* Background line (grey) */}
-          <div className="absolute top-0 bottom-0 w-px bg-white/30"></div>
-          
-          {/* Progress line (green) that fills from top */}
-          <div 
-            className="absolute top-0 w-px bg-[#00ff88] transition-all duration-500 ease-out"
-            style={{ height: `${progressPercentage}%` }}
-          ></div>
-          
-          {/* Tick marks */}
-          <div className="absolute top-1/4 right-0 w-2 h-px bg-white z-10"></div>
-          <div className="absolute top-1/2 right-0 w-2 h-px bg-white z-10"></div>
-          <div className="absolute top-3/4 right-0 w-2 h-px bg-white z-10"></div>
-          {/* Step number */}
-          <div className="absolute bottom-24 right-4 text-white text-sm z-10">{currentData.number}</div>
-        </div>
+        {/* Left Section */}
+        <div className="w-1/2 flex flex-col border-r border-gray-800 relative">
+          {/* Vertical divider with tick marks and progress line - show for all steps */}
+          <div className="absolute right-0 top-0 bottom-0 w-px">
+            {/* Background line (grey) */}
+            <div className="absolute top-0 bottom-0 w-px bg-white/20"></div>
 
-        {/* Content */}
-        <div className="flex-1 flex flex-col p-12 pt-24">
-          {/* "HOW DOES IT WORK?" heading */}
-          <div className="mb-12">
-            <h3 className="text-lg tracking-wider text-white uppercase mb-6">THREE AGENTS
-            ONE SYSTEM.</h3>
-            {/* 3x3 dots grid - fill progressively based on scroll */}
-            <div className="grid grid-cols-3 gap-2 w-15 mb-12">
-              {[...Array(totalDots)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    i < filledDots ? 'bg-[#00ff88]' : 'bg-gray-700'
-                  }`}
-                ></div>
-              ))}
+            {/* Progress line (green) that fills from top */}
+            <div
+              className="absolute top-0 w-px bg-[#00ff88] transition-all duration-500 ease-out"
+              style={{ height: `${progressPercentage}%` }}
+            ></div>
+
+            {/* Tick marks */}
+            <div className="absolute top-1/4 right-0 w-2 h-px bg-white z-10"></div>
+            <div className="absolute top-1/2 right-0 w-2 h-px bg-white z-10"></div>
+            <div className="absolute top-3/4 right-0 w-2 h-px bg-white z-10"></div>
+            {/* Step number */}
+            <div className="absolute bottom-24 right-4 text-white text-sm z-10">
+              {currentData.number}
             </div>
           </div>
 
-          <div className="flex-1 flex flex-col">
-            <div className="mb-3">
-              <div className="flex items-baseline gap-4 mb-4 border-b border-[#00ff88] pb-2">
-                <h2 
-                  key={currentData.title}
-                  className="text-6xl font-bold animate-fadeIn"
-                >
-                  {currentData.title}
-                </h2>
-              </div>
-              {/* Green box with subtitle */}
-              <Typography variant='span' color='black' className='bg-[#00ff88] px-4 py-1 mb-6 inline-block'>
-              {currentData.subtitle}
+          {/* Content */}
+          <div className="flex-1 flex flex-col p-10 pt-20 space-y-8">
+            {/* Header */}
+            <div>
+              <Typography
+                variant="span"
+                color="white"
+                className="text-[10px] tracking-[0.3em] text-white/60 uppercase mb-3 block"
+              >
+                HOW MAXXIT TRADES FOR YOU
               </Typography>
-              
+              <Typography
+                variant="h4"
+                color="white"
+                className="uppercase mb-3"
+              >
+                THREE AGENTS · ONE FLOW
+              </Typography>
+              <Typography
+                variant="span"
+                color="white"
+                className="text-[12px] text-white/60 max-w-md"
+              >
+                Think of this as a 3-step pipeline. Hover or tap an agent row below to expand it and
+                see how it fits into the trading flow.
+              </Typography>
             </div>
 
-            <p 
-              key={currentData.description}
-              className="text-sm leading-relaxed max-w-lg uppercase animate-fadeIn"
-            >
-              {currentData.description}
-            </p>
+            {/* Accordion */}
+            <div className="flex-1 flex flex-col gap-3">
+              {steps.map((step, index) => {
+                const isActive = index === currentStep;
+                return (
+                  <button
+                    key={step.number}
+                    type="button"
+                    onMouseEnter={() => setCurrentStep(index)}
+                    onFocus={() => setCurrentStep(index)}
+                    onClick={() => setCurrentStep(index)}
+                    className={`w-full text-left border rounded-lg px-4 py-3 transition-colors ${
+                      isActive
+                        ? 'border-[#00ff88] bg-[#00ff88]/10'
+                        : 'border-white/15 bg-transparent hover:border-white/40'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <Typography
+                          variant="span"
+                          color="#00ff88"
+                          className="text-[10px] tracking-[0.25em] uppercase"
+                        >
+                          {step.number}
+                        </Typography>
+                        <Typography
+                          variant="span"
+                          color="white"
+                          className="text-sm font-semibold tracking-wide"
+                        >
+                          {step.title}
+                        </Typography>
+                      </div>
+                      <span className="text-xs text-white/40 tracking-[0.2em] uppercase">
+                        {isActive ? 'OPEN' : 'VIEW'}
+                      </span>
+                    </div>
+                    {isActive && (
+                      <div className="mt-3 border-t border-[#00ff88]/40 pt-3">
+                        <Typography
+                          variant="span"
+                          color="black"
+                          className="bg-[#00ff88] px-3 py-1 mb-3 inline-block text-[10px] tracking-[0.18em]"
+                        >
+                          {step.subtitle}
+                        </Typography>
+                        
+                        <p className="text-md    text-white/80 leading-relaxed max-w-md">
+                          {step.description}
+                        </p>
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Right Section */}
-      <div className="w-1/2 relative">
-        
-          
-        
-        {/* Dynamic Content */}
-        <div 
-          key={currentStep}
-          className="w-full h-full animate-fadeIn"
-        >
-          {currentData.rightContent}
+        {/* Right Section */}
+        <div className="w-1/2 relative">
+          {/* Dynamic Content */}
+          <div
+            key={currentStep}
+            className="w-full h-full animate-fadeIn"
+          >
+            {currentData.rightContent}
+          </div>
         </div>
-      </div>
 
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
+        <style jsx>{`
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          .animate-fadeIn {
+            animation: fadeIn 0.6s ease-out;
           }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.6s ease-out;
-        }
-      `}</style>
+        `}</style>
       </div>
     </div>
   );

@@ -90,8 +90,13 @@ const ClubCard: React.FC<ClubCardProps> = ({ id, name, return30d, sharpe, active
 const Clubs = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const maxTranslateRef = useRef(0);
+  const [offset, setOffset] = useState(0);
+  const contentWidthRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const isHoveredRef = useRef(false);
+  const lastScrollYRef = useRef<number | null>(null);
+  const velocityRef = useRef(0); // tracks vertical scroll velocity from Lenis
+  const lastTimeRef = useRef<number | null>(null);
 
   const clubs: ClubCardProps[] = [
     {
@@ -132,64 +137,81 @@ const Clubs = () => {
   ];
 
   useEffect(() => {
-    // Calculate max translate once on mount and resize
-    const calculateMaxTranslate = () => {
+    // Measure content width for seamless looping
+    const measure = () => {
       if (scrollContainerRef.current && containerRef.current) {
-        const containerWidth = containerRef.current.offsetWidth;
-        const contentWidth = scrollContainerRef.current.scrollWidth;
-        maxTranslateRef.current = Math.max(0, contentWidth - containerWidth);
+        const contentWidth = scrollContainerRef.current.scrollWidth / 2; // single set width
+        contentWidthRef.current = contentWidth;
       }
     };
 
-    calculateMaxTranslate();
+    measure();
+    window.addEventListener('resize', measure);
 
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
+  useEffect(() => {
+    // Capture vertical scroll velocity (Lenis keeps native scroll events firing)
     const handleScroll = () => {
-      if (!containerRef.current) return;
-
-      const container = containerRef.current;
-      const rect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const containerHeight = container.offsetHeight;
-      
-      // Calculate scroll progress as container scrolls through viewport
-      const containerTop = rect.top;
-      const scrollStart = windowHeight * 0.8; // Start translating earlier
-      const scrollEnd = -containerHeight; // End when container bottom leaves viewport
-      const scrollRange = scrollStart - scrollEnd;
-      
-      let progress = 0;
-      if (containerTop <= scrollStart && containerTop >= scrollEnd) {
-        progress = (scrollStart - containerTop) / scrollRange;
-        progress = Math.max(0, Math.min(1, progress));
-      } else if (containerTop < scrollEnd) {
-        progress = 1;
+      const y = window.scrollY || window.pageYOffset;
+      if (lastScrollYRef.current !== null) {
+        const delta = y - lastScrollYRef.current;
+        // low-pass filter to smooth sudden spikes
+        velocityRef.current = velocityRef.current * 0.85 + delta * 0.15;
       }
-      
-      setScrollProgress(progress);
-    };
-
-    const handleResize = () => {
-      calculateMaxTranslate();
-      handleScroll();
+      lastScrollYRef.current = y;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleResize, { passive: true });
-    handleScroll(); // Initial call
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Calculate horizontal translation based on scroll progress
-  const translateX = -scrollProgress * maxTranslateRef.current;
+  useEffect(() => {
+    const baseSpeed = 60; // px per second when scrolling gently
+    const maxMultiplier = 4; // speed boost when scrolling fast
+
+    const tick = (timestamp: number) => {
+      if (lastTimeRef.current == null) {
+        lastTimeRef.current = timestamp;
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      const dt = (timestamp - lastTimeRef.current) / 1000; // seconds
+      lastTimeRef.current = timestamp;
+
+      if (!isHoveredRef.current) {
+        const v = velocityRef.current;
+        const intensity = Math.min(Math.abs(v) / 12, 1); // tune sensitivity
+        const direction = v >= 0 ? 1 : -1; // scroll down -> move left
+        const speed = baseSpeed * (1 + intensity * (maxMultiplier - 1)) * direction;
+
+        setOffset((prev) => {
+          const width = contentWidthRef.current || 1;
+          let next = prev - speed * dt;
+          if (next <= -width) next += width;
+          if (next >= 0) next = next % -width;
+          return next;
+        });
+
+        // Gradual decay so slider slows if scrolling stops
+        velocityRef.current *= 0.93;
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
     <section
       ref={containerRef}
-      className="relative bg-black text-white py-20 px-4 sm:px-6 lg:px-8 min-h-[100vh] flex flex-col justify-center"
+      className="relative text-white py-20 px-4 sm:px-6 lg:px-8 min-h-[100vh] flex flex-col justify-center"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
@@ -217,16 +239,17 @@ const Clubs = () => {
         </div>
 
         {/* Horizontal Scroll Container */}
-        <div className="overflow-x-hidden w-full">
+        <div
+          className="overflow-x-hidden w-full"
+          onMouseEnter={() => (isHoveredRef.current = true)}
+          onMouseLeave={() => (isHoveredRef.current = false)}
+        >
           <div
             ref={scrollContainerRef}
-            className="flex gap-6 pb-4"
-            style={{
-              transform: `translateX(${translateX}px)`,
-              willChange: 'transform',
-            }}
+            className="flex gap-6 pb-4 will-change-transform"
+            style={{ transform: `translateX(${offset}px)` }}
           >
-            {clubs.map((club) => (
+            {[...clubs, ...clubs].map((club, idx) => (
               <ClubCard key={club.id} {...club} />
             ))}
           </div>
