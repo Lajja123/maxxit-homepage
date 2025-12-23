@@ -3,6 +3,7 @@ import { ScrollMarquee } from "@/components/ui/ScrollMarquee";
 import React from "react";
 import Layers from "@/components/Home/Layers";
 import Clubs from "@/components/Home/Clubs";
+import GetStartedSection from "@/components/Home/getStarted";
 
 function Homepage() {
   return (
@@ -15,6 +16,7 @@ function Homepage() {
       />
       <Layers />
       <Clubs/>
+      <GetStartedSection/>
     </div>
   );
 }
